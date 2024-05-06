@@ -34,7 +34,6 @@ public class ObCrankerApplication {
     private int solUsdcPriorityFee;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(8);
-
     public static void main(String[] args) {
         SpringApplication.run(ObCrankerApplication.class, args);
     }
@@ -68,16 +67,16 @@ public class ObCrankerApplication {
                 );
 
                 if (transactionId.isPresent()) {
-                    log.info("Cranked primary events: {}", transactionId.get());
+                    log.info("Cranked SOL/USDC events: {}", transactionId.get());
                 } else {
-                    log.info("No primary events found to consume.");
+                    log.info("No events found for SOL/USDC.");
                 }
             } catch (Exception ex) {
                 log.error("Error cranking SOL/USDC: {}", ex.getMessage(), ex);
             }
-        }, 0, 1000, TimeUnit.MILLISECONDS); // 1s frequency for SOL/USDC
+        }, 0, 1000, TimeUnit.MILLISECONDS); // 1s frequency
 
-        // Cranking new market 1
+        // Cranking KMNO/USDC
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 PublicKey marketId = PublicKey.valueOf("2ekKD6GQy9CPqyqZyFdERr14JcjD5QcJj7DbFfW23k4W");
@@ -90,16 +89,16 @@ public class ObCrankerApplication {
                 );
 
                 if (transactionId.isPresent()) {
-                    log.info("Cranked Market 1 events: {}", transactionId.get());
+                    log.info("Cranked KMNO/USDC events: {}", transactionId.get());
                 } else {
-                    log.info("No events found for Market 1.");
+                    log.info("No events found for KMNO/USDC.");
                 }
             } catch (Exception ex) {
-                log.error("Error cranking Market 1: {}", ex.getMessage(), ex);
+                log.error("Error cranking KMNO/USDC: {}", ex.getMessage(), ex);
             }
-        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency for new market 1
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
 
-        // Cranking new market 2
+        // Cranking BONK/USDC
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 PublicKey marketId = PublicKey.valueOf("Gio5iGZF9YVvhX6vwW3fZEfnPhtafseapaseGbAoiH9D");
@@ -112,15 +111,38 @@ public class ObCrankerApplication {
                 );
 
                 if (transactionId.isPresent()) {
-                    log.info("Cranked Market 2 events: {}", transactionId.get());
+                    log.info("Cranked BONK/USDC events: {}", transactionId.get());
                 } else {
-                    log.info("No events found for Market 2.");
+                    log.info("No events found for BONK/USDC.");
                 }
             } catch (Exception ex) {
-                log.error("Error cranking Market 2: {}", ex.getMessage(), ex);
+                log.error("Error cranking BONK/USDC: {}", ex.getMessage(), ex);
             }
-        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency for market 2
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
 
+        // Cranking JUP/USDC
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("7iDUNFiwpGjgFW5JmAjhVGXWdBfBXkc9ibFnxUrPNHjM");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked JUP/USDC events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for JUP/USDC.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking JUP/USDC: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
+        // Cranking all other markets
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 manager.cacheMarkets();
