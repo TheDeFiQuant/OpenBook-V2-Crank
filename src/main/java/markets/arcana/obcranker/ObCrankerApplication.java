@@ -55,15 +55,15 @@ public class ObCrankerApplication {
         log.info("Crank wallet: {}", finalTradingAccount.getPublicKey().toBase58());
         log.info("RPC: {}", endpoint);
 
+        // Cranking SOL/USDC
         scheduler.scheduleAtFixedRate(() -> {
             try {
-                // SOL/USDC
                 PublicKey marketId = PublicKey.valueOf("CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3");
                 Optional<String> transactionId = manager.consumeEvents(
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by arcana.markets \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
                         solUsdcPriorityFee
                 );
 
@@ -75,8 +75,51 @@ public class ObCrankerApplication {
             } catch (Exception ex) {
                 log.error("Error cranking SOL/USDC: {}", ex.getMessage(), ex);
             }
+        }, 0, 1000, TimeUnit.MILLISECONDS); // 1s frequency for SOL/USDC
 
-        }, 0, 2000, TimeUnit.MILLISECONDS);
+        // Cranking new market 1
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("2ekKD6GQy9CPqyqZyFdERr14JcjD5QcJj7DbFfW23k4W");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+
+                if (transactionId.isPresent()) {
+                    log.info("Cranked Market 1 events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for Market 1.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking Market 1: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency for new market 1
+
+        // Cranking new market 2
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("Gio5iGZF9YVvhX6vwW3fZEfnPhtafseapaseGbAoiH9D");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+
+                if (transactionId.isPresent()) {
+                    log.info("Cranked Market 2 events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for Market 2.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking Market 2: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency for market 2
 
         scheduler.scheduleAtFixedRate(() -> {
             try {
@@ -88,15 +131,10 @@ public class ObCrankerApplication {
                                 finalTradingAccount,
                                 market.getMarketId(),
                                 8,
-                                "Cranked by arcana.markets \uD83E\uDDD9"
+                                "Cranked by QuanDeFi \uD83E\uDDD9"
                         );
                     } catch (Exception ex) {
-                        log.error(
-                                "Error cranking market [{}]: {}",
-                                market.getMarketId().toBase58(),
-                                ex.getMessage(),
-                                ex
-                        );
+                        log.error("Error cranking market [{}]: {}", market.getMarketId().toBase58(), ex.getMessage(), ex);
                     }
 
                     if (transactionId.isPresent()) {
@@ -113,7 +151,6 @@ public class ObCrankerApplication {
             } catch (Exception ex) {
                 log.error("Error caching/cranking markets: {}", ex.getMessage(), ex);
             }
-
         }, 0, 30, TimeUnit.SECONDS);
     }
 }
