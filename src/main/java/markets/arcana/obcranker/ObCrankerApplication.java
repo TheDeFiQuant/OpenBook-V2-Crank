@@ -120,6 +120,28 @@ public class ObCrankerApplication {
             }
         }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
 
+        // Cranking BONK/SOL
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("DBSZ24hqXS5o8djunrTzBsJUb1P8ZvBs1nng5rmZKsJt");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+
+                if (transactionId.isPresent()) {
+                    log.info("Cranked BONK/SOL events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for BONK/SOL.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking BONK/SOL: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
         // Cranking JUP/USDC
         scheduler.scheduleAtFixedRate(() -> {
             try {
@@ -139,6 +161,28 @@ public class ObCrankerApplication {
                 }
             } catch (Exception ex) {
                 log.error("Error cranking JUP/USDC: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
+        // Cranking MPLX/USDC
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("Gudvr1FPgxKfnMoEEBXDgXWzmoavTY7nGC9TcdM4s3SP");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked MPLX/USDC events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for MPLX/USDC.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking MPLX/USDC: {}", ex.getMessage(), ex);
             }
         }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
 
