@@ -75,7 +75,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
 
@@ -97,7 +97,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
 
@@ -119,7 +119,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
 
@@ -141,7 +141,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
 
@@ -163,7 +163,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -185,7 +185,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -207,7 +207,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -229,7 +229,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -251,7 +251,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -273,7 +273,7 @@ public class ObCrankerApplication {
                         finalTradingAccount,
                         marketId,
                         8,
-                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        "Cranked by QuanDeFi \uD83D\uDC38",
                         solUsdcPriorityFee
                 );
     
@@ -298,10 +298,15 @@ public class ObCrankerApplication {
                                 finalTradingAccount,
                                 market.getMarketId(),
                                 8,
-                                "Cranked by QuanDeFi \uD83E\uDDD9"
+                                "Cranked by QuanDeFi \uD83D\uDC38"
                         );
                     } catch (Exception ex) {
-                        log.error("Error cranking market [{}]: {}", market.getMarketId().toBase58(), ex.getMessage(), ex);
+                        log.error(
+                                "Error cranking market [{}]: {}",
+                                market.getMarketId().toBase58(),
+                                ex.getMessage(),
+                                ex
+                        );
                     }
 
                     if (transactionId.isPresent()) {
