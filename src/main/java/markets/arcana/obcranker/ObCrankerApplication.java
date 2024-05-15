@@ -1,3 +1,16 @@
+//
+//      Markets that are being cranked:
+//      SOL/USDC = CFSMrBssNG8Ud1edW59jNLnq2cwrQ9uY5cM3wXmqRJj3
+//      KMNO/USDC = 2ekKD6GQy9CPqyqZyFdERr14JcjD5QcJj7DbFfW23k4W
+//      BONK/USDC = Gio5iGZF9YVvhX6vwW3fZEfnPhtafseapaseGbAoiH9D
+//      BONK/SOL = DBSZ24hqXS5o8djunrTzBsJUb1P8ZvBs1nng5rmZKsJt
+//      JUP/USDC = 7iDUNFiwpGjgFW5JmAjhVGXWdBfBXkc9ibFnxUrPNHjM
+//      MPLX/USDC = Gudvr1FPgxKfnMoEEBXDgXWzmoavTY7nGC9TcdM4s3SP
+//      ETH/USDC = 4fCi5tr3CuBNgMZcaEUXTwm6f346Z5XGBNXB7d6jipFD
+//      JTO/USDC = FSH2ModacQupfzjBXbNmKW4favFhjBN6xbms8CRqe6PV
+//      DRFT/USDC = D8BPZXCYvVBkXR5NAoDnuzjFGuF2kFKWyfEUtZbmjRg7
+//      DRFT/SOL = CGqQYE1SGduEx4vKBfmJQ7Yj4tAyDeV932RuaaCq7Xkz 
+//      
 package markets.arcana.obcranker;
 
 import com.google.common.io.Resources;
@@ -185,6 +198,94 @@ public class ObCrankerApplication {
                 log.error("Error cranking MPLX/USDC: {}", ex.getMessage(), ex);
             }
         }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
+        // Cranking ETH/USDC
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("4fCi5tr3CuBNgMZcaEUXTwm6f346Z5XGBNXB7d6jipFD");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked ETH/USDC events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for ETH/USDC.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking ETH/USDC: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
+        // Cranking JTO/USDC
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("FSH2ModacQupfzjBXbNmKW4favFhjBN6xbms8CRqe6PV");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked JTO/USDC events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for JTO/USDC.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking JTO/USDC: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency
+
+        // Cranking DRFT/USDC
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("D8BPZXCYvVBkXR5NAoDnuzjFGuF2kFKWyfEUtZbmjRg7");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked DRFT/USDC events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for DRFT/USDC.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking DRFT/USDC: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency    
+
+        // Cranking DRFT/SOL
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                PublicKey marketId = PublicKey.valueOf("CGqQYE1SGduEx4vKBfmJQ7Yj4tAyDeV932RuaaCq7Xkz");
+                Optional<String> transactionId = manager.consumeEvents(
+                        finalTradingAccount,
+                        marketId,
+                        8,
+                        "Cranked by QuanDeFi \uD83E\uDDD9",
+                        solUsdcPriorityFee
+                );
+    
+                if (transactionId.isPresent()) {
+                    log.info("Cranked DRFT/SOL events: {}", transactionId.get());
+                } else {
+                    log.info("No events found for DRFT/SOL.");
+                }
+            } catch (Exception ex) {
+                log.error("Error cranking DRFT/SOL: {}", ex.getMessage(), ex);
+            }
+        }, 0, 1000, TimeUnit.MILLISECONDS);  // 1s frequency    
 
         // Cranking all other markets
         scheduler.scheduleAtFixedRate(() -> {
